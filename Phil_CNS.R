@@ -1,0 +1,2 @@
+############COPY NUMBER SIGNATURE CALLING USING CINSIGNATUREQUANTIFICATION ##################
+# Input data is absolute copy number profiles in segemnt table format, containing multiple samples, without allele or subclonal information
