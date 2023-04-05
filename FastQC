@@ -1,0 +1,29 @@
+#!/bin/sh
+# Hannah Crook
+# 16/03/2023
+# Project: BrainMets_sWGS_Run2
+# Data type: sWGS
+# Notes: Run FastQC on raw sequencing files
+
+# Array job!
+
+#PBS -l select=1:ncpus=4:mem=2gb
+#PBS -l walltime=12:0:0
+#PBS -N FastQC-OHA-AmpliSeq
+#PBS -J 1-26
+
+module load anaconda3/personal
+
+tmp=/rds/general/user/hec22/projects/mcneish_team_data/ephemeral/IGFQ001515_mcneish_14-12-2022_lcWGS/data/temp
+
+cd /rds/general/user/hec22/projects/mcneish_team_data/ephemeral/IGFQ001515_mcneish_14-12-2022_lcWGS/data/reads2
+
+sample=`ls | tail -n $PBS_ARRAY_INDEX | head -1`
+echo "Working with sample "$sample
+cd $sample
+
+r1=`ls | grep R1_001`
+r2=`ls | grep R2_001`
+
+fastqc -t 4 $r1 -d $tmp
+fastqc -t 4 $r2 -d $tmp
